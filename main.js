@@ -125,39 +125,6 @@ class PicrossField {
 }
 
 
-// let pixelMap = [];	// 1: black, 0: white, -1: peke
-
-// var fieldHTML = "";
-// const numberOfCell = [15, 15];
-// const hintx = 5;
-// const hinty = 5;
-// for(let i = 0; i < numberOfCell[1] + hintx; i++) {
-// 	fieldHTML += '<tr class="fieldRow">';
-// 	// fieldHTML += '<div class="fieldRow">';
-// 	if(i >= hintx) { pixelMap.push([]); }
-// 	for(let j = 0; j < numberOfCell[0] + hinty; j++) {
-// 		if(i < hintx && j < hinty) {
-// 			fieldHTML += '<td class="hintCell"></td>';
-// 		} else if(i < hintx) {
-// 			fieldHTML += '<td class="hintCell" id="hintx_' + (j - hinty) + '_' + (hintx - i - 1) + '"></td>';
-// 		} else if(j < hinty) {
-// 			fieldHTML += '<td class="hintCell" id="hinty_' + (i - hintx) + '_' + (hinty - j - 1) + '"></td>';
-// 		} else {
-// 			fieldHTML += '<td class="picrossCell"><input type="button" class="picrossPixel" id="pixel_' + (j - hinty) + '_' + (i - hintx) + '" onclick="picrossPixelClicked(' + (j - hinty) + ', ' + (i - hintx) + ');" /></td>';
-// 			// fieldHTML += '<input type="button" class="picrossPixel" id="pixel_' + i + '_' + j + '" onclick="picrossPixelClicked(' + i + ', ' + j + ');" />';
-// 			pixelMap[i - hintx].push(0);
-// 		}
-// 	}
-// 	fieldHTML += '</tr>';
-// 	// fieldHTML += '</div>';
-// }
-// document.getElementById("field").innerHTML = fieldHTML;
-// pixelMap.forEach(function(v, i) {
-// 	v.forEach(function(w, j) {
-// 		document.getElementById("pixel_" + j + "_" + i).style.backgroundColor = "#FFFFFF";
-// 	});
-// });
-
 const picture = [
 [0, 0, 0, 0, 0, 0, 1, 1, 1, 0],
 [0, 0, 0, 0, 0, 1, 0, 0, 0, 1],
