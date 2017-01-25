@@ -51,12 +51,12 @@ class PicrossField {
 
 		hintArray[0].forEach((v, i) => {
 			v.forEach((w, j) => {
-				this.doc.getElementById("hintx_" + i + "_" + j).innerHTML = w;
+				this.doc.getElementById("hintx_" + i + "_" + (v.length - j - 1)).innerHTML = w;
 			});
 		});
 		hintArray[1].forEach((v, i) => {
 			v.forEach((w, j) => {
-				this.doc.getElementById("hinty_" + i + "_" + j).innerHTML = w;
+				this.doc.getElementById("hinty_" + i + "_" + (v.length - j - 1)).innerHTML = w;
 			});
 		});
 	}
