@@ -3,13 +3,14 @@ class PicrossField {
 		this.doc = doc;
 		this.fieldName = fieldName;
 		this.pixelMap = [];
+		this.hintArray = [];
 	}
 
 	fieldGenerator(pictureArray) {
 		this.pixelMap = [];
-		var hintArray = this.hintGenerator(pictureArray);
+		this.hintArray = this.hintGenerator(pictureArray);
 		var hint = [];
-		hintArray.forEach(function(v, i) {
+		this.hintArray.forEach(function(v, i) {
 			var max = 1;
 			v.forEach(function(w, j) {
 				w.forEach(function(x, k) {
@@ -49,12 +50,12 @@ class PicrossField {
 			});
 		});
 
-		hintArray[0].forEach((v, i) => {
+		this.hintArray[0].forEach((v, i) => {
 			v.forEach((w, j) => {
 				this.doc.getElementById("hintx_" + i + "_" + (v.length - j - 1)).innerHTML = w;
 			});
 		});
-		hintArray[1].forEach((v, i) => {
+		this.hintArray[1].forEach((v, i) => {
 			v.forEach((w, j) => {
 				this.doc.getElementById("hinty_" + i + "_" + (v.length - j - 1)).innerHTML = w;
 			});
@@ -113,14 +114,108 @@ class PicrossField {
 
 	pixelClicked(x, y) {
 		var pixel = this.doc.getElementById("pixel_" + x + "_" + y);
+		if(false) {
+			return 0;
+		}
 		if(pixel.style.backgroundColor === "rgb(255, 255, 255)") {
 			pixel.style.backgroundColor = "#000000";
-			pixelMap[y][x] = 1;
+			this.pixelMap[y][x] = 1;
 		} else {
 			pixel.style.backgroundColor = "#FFFFFF";
-			pixelMap[y][x] = 0;
+			this.pixelMap[y][x] = 0;
 		}
-		// console.table(pixelMap);
+		// console.table(this.pixelMap);
+	}
+}
+
+class CanvasPicrossField {
+	constructor(doc, fieldName) {	// elementを与えるほうがきれいじゃね？
+		this.doc = doc;
+		this.fieldName = fieldName;
+		this.ctx = this.doc.getElementById(this.fieldName).getContext("2d");
+		this.canvasWidth = 200;
+		this.canvasHeight = 200;
+		this.cellWidth = 20;
+		this.cellHeight = 20;
+		this.pixelMap = [];
+		this.hintArray = [];
+	}
+
+	fieldGenerator(pictureArray) {
+		this.pixelMap = [];
+		this.hintArray = this.hintGenerator(pictureArray);
+		var hint = [];
+		this.hintArray.forEach(function(v, i) {
+			var max = 1;
+			v.forEach(function(w, j) {
+				if(w.length > max) {
+					max = w.length;
+				}
+			});
+			hint[i] = max;
+		});
+
+		// 本体
+	}
+
+	hintGenerator(pictureArray) {
+		var hintx = [];
+		var hinty = [];
+		var pre = null;
+		var count = 0;
+		// hinty
+		pictureArray.forEach(function(v, i) {
+			hinty.push([]);
+			count = 0;
+			v.forEach(function(w, j) {
+				if(w === 1) {
+					count++;
+					if(j === v.length - 1) {
+						hinty[i].push(count);
+					}
+				} else {
+					if(count) {
+						hinty[i].push(count);
+					}
+					count = 0;
+				}
+			});
+			if(hinty[i].length === 0){
+				hinty[i] = [0];
+			}
+		});
+		// hintx
+		pictureArray[0].forEach(function(w, j) {
+			hintx.push([]);
+			count = 0;
+			pictureArray.forEach(function(v, i) {
+				if(v[j] === 1) {
+					count++;
+					if(i === v.length - 1) {
+						hintx[j].push(count);
+					}
+				} else {
+					if(count) {
+						hintx[j].push(count);
+					}
+					count = 0;
+				}
+			});
+			if(hintx[j].length === 0){
+				hintx[j] = [0];
+			}
+		});
+		return [hintx, hinty];
+	}
+
+	pixelClicked(x, y) {
+		
+	}
+
+	setResolution(reso) {
+		this.doc.getElementById(this.fieldName).setAttribute("width", canvasWidth * reso);
+		this.doc.getElementById(this.fieldName).setAttribute("height", canvasHeight * reso);
+		this.ctx.scale(reso, reso);
 	}
 }
 
@@ -137,5 +232,6 @@ const picture = [
 [0, 0, 1, 1, 1, 1, 1, 1, 0, 0],
 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
 
+// var game = new CanvasPicrossField(document, "field");
 var game = new PicrossField(document, "field");
 game.fieldGenerator(picture);
