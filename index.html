@@ -30,11 +30,16 @@
 			border: #DDDDDD solid 0.2px;
 			padding: 0px;
 		}
+
+		.canvasField {
+			/*pointer-events: none;*/
+			cursor: default;
+		}
 	</style>
 </head>
-<body>
+<body oncontextmenu="return false;">
 <table id="field" class="field"></table>
-<canvas id="canvasField"></canvas>
+<canvas id="canvasField" class="canvasField"></canvas>
 <script type="text/javascript" src="./main.js"></script>
 </body>
 </html>
