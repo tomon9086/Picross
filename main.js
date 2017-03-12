@@ -126,6 +126,8 @@ class PicrossField {
 			});
 		});
 		// mouse event
+		xIni = this.cellWidth * hint[1] + this.linePixel * (hint[1] - 1) + this.borderPixel - this.linePixel;
+		yIni = this.cellHeight * hint[0] + this.linePixel * (hint[0] - 1) + this.borderPixel - this.linePixel;
 		const cellCalc = (x, y) => {
 			const cx = Math.floor((x - xIni) / (this.cellWidth + this.linePixel) / this.resolution) - 1;
 			const cy = Math.floor((y - yIni) / (this.cellWidth + this.linePixel) / this.resolution) - 1;
@@ -244,6 +246,7 @@ const picture = [
 [1, 1, 0, 0, 0, 0, 0, 0, 1, 0],
 [0, 0, 1, 1, 1, 1, 1, 1, 0, 0],
 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
+
 
 var game = new PicrossField(document.getElementById("canvasField"));
 game.fieldGenerator(picture);

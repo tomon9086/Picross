@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Input Problem</title>
+	<style type="text/css">
+		body {
+			user-select: none;
+		}
+		.matrixCfg {
+			width: 30px;
+		}
+		.canvasField {
+			cursor: default;
+		}
+		.exportArea {
+			width: 300px;
+			height: 100px;
+			user-select: all;
+		}
+	</style>
+</head>
+<body oncontextmenu="return false;">
+	<div>
+		<label>行の数 (Number of Row) : </label>
+		<input type="number" class="matrixCfg" id="numOfRow" value="5" />
+		<label>列の数 (Number of Column) : </label>
+		<input type="number" class="matrixCfg" id="numOfCol" value="5" />
+		<input type="button" value="Generate Input Matrix" onclick="fieldGenerator();" />
+		<input type="button" value="Export" onclick="exportArray();" />
+	</div>
+	<canvas id="inputCanvas" class="canvasField"></canvas>
+	<div>
+		<textarea id="exportArea" class="exportArea" readonly></textarea>
+	</div>
+	<script type="text/javascript" src="./inputpicture.js"></script>
+</body>
+</html>
